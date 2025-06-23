@@ -10,6 +10,25 @@
   color: #efb8d2;
 }
 
+.display-cart-icon {
+  position: absolute;
+  top: 30px;
+  right: 120px;
+  font-size: 40px;
+}
+
+.cart-sum {
+  position: absolute;
+  background-color: #f269a9;
+  color: #5b072e;
+  font-size: 20px;
+  width: 22px;
+  height: 22px;
+  border-radius: 222px;
+  top: -2px;
+  right: -14px;
+}
+
 .btn-cont {
   margin: 20px auto;
   width: fit-content;
@@ -46,12 +65,12 @@ form {
 }
 
 .coctails-list {
-  width: 900px;
+  width: 1150px;
   margin: 20px 0;
   /* background-color: pink; */
   height: fit-content;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   row-gap: 30px;
 }
 
@@ -97,7 +116,7 @@ form {
   transform: translate(-50%, 50%);
 }
 
-.bx-cart-add,
+.btn-icon,
 .btn {
   color: rgb(0, 0, 0);
   background-color: #efb8d2;
@@ -127,17 +146,33 @@ form {
 }
 
 .cart-window {
-  position: absolute;
-  top: 180px;
-  right: 50px;
+  position: fixed;
+  top: 0;
+  right: 0;
   /* background-color: #5b072e; */
   background-color: #eab7d1;
-  width: 300px;
-  height: 500px;
-  padding: 10px;
+  width: 400px;
+  height: fit-content;
+  min-height: 300px;
+  padding: 50px 20px;
   display: flex;
   flex-direction: column;
   gap: 5px;
+  transform: translateX(100%);
+  border-bottom-left-radius: 10px;
+
+  transition: all 0.5s ease-in;
+
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.open-cart {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transform: translate(0);
 }
 
 .cart-item {
@@ -168,8 +203,8 @@ form {
   height: 20px;
   border-radius: 222px;
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: 12px;
+  right: 12px;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -178,6 +213,28 @@ form {
   border: none;
   color: #eab7d1;
 }
+
+.close-btn {
+  justify-self: end;
+  background: none;
+  color: #230312;
+  border: 0.5px solid #230312;
+  width: 30px;
+  height: 30px;
+  border-radius: 222px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background-color: #5b072e;
+  border: none;
+  color: #eab7d1;
+}
+
 .cart-item-details {
   background-color: #eab7d1;
   color: #230312;
@@ -185,6 +242,7 @@ form {
 }
 .cartName,
 h3,
+.empty-cart,
 .amnt {
   background-color: #eab7d1;
   color: #230312;

@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import CoctailItem from "./CoctailItem";
+import { debounce } from "throttle-debounce";
 
 function App() {
   const [coctails, setCoctails] = useState(null);
 
+  const [query, setQuery] = useState("");
+
   const [error, showError] = useState(false);
 
   const [cart, setCart] = useState([]);
-  console.log(cart);
+
+  const [displayCart, setDisplayCart] = useState(false);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -38,6 +42,43 @@ function App() {
     };
 
     fetchPost();
+  }
+
+  function handleInputChange(e) {
+    console.log(e.target.value);
+    setQuery(e.target.value);
+    console.log(query);
+    const newQuery = e.target.value;
+    if (!newQuery) return;
+    setQuery(newQuery);
+
+    const debounceFunc = debounce(1500, () => {
+      const fetchPost = async () => {
+        try {
+          showError(false);
+          const response = await fetch(
+            ` https://thecocktaildb.com/api/json/v1/1/search.php?s=${newQuery}`
+          );
+          const posts = await response.json();
+          console.log(posts);
+          console.log(response);
+          console.log(posts.drinks);
+
+          setCoctails(posts.drinks);
+          if (!posts.drinks) showError(true);
+        } catch (error) {
+          console.log("error", error);
+        }
+      };
+
+      fetchPost();
+    });
+
+    debounceFunc();
+
+    debounceFunc.cancel({ upcomingOnly: true });
+
+    debounceFunc();
   }
 
   function checkIsItemInCart(id) {
@@ -88,6 +129,12 @@ function App() {
   return (
     <>
       <h1>Our Coctails</h1>
+      <i
+        className="bx bx-cart-add display-cart-icon"
+        onClick={() => setDisplayCart(true)}
+      >
+        <p className="cart-sum">{`${sumAllItems()}`}</p>{" "}
+      </i>
 
       <div className="btn-cont">
         {ingredients.map((ingredient, index) => {
@@ -100,7 +147,7 @@ function App() {
 
       <label>Search by name:</label>
       {/* prettier-ignore */}
-      <input type="text" className="input-name"  />
+      <input type="text" className="input-name" value={query} onChange={(e) => handleInputChange(e)} />
 
       {!error && (
         <div className="coctails-list">
@@ -114,8 +161,15 @@ function App() {
         </div>
       )}
 
-      <div className="cart-window">
-        <h3> {`Items in cart: ${sumAllItems()}`} </h3>
+      <div className={`cart-window ${displayCart ? "open-cart" : ""}`}>
+        <button className="close-btn" onClick={() => setDisplayCart(false)}>
+          {" "}
+          X{" "}
+        </button>
+        {cart.length > 0 && <h3> {`Items in cart: ${sumAllItems()}`} </h3>}
+        {cart.length === 0 && (
+          <h1 className="empty-cart"> {`Cart is empty...`} </h1>
+        )}
         {cart.map((cartItem, index) => (
           // <div className="cart-item" key={index}>
           //   {" "}

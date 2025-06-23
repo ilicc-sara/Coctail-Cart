@@ -56,7 +56,7 @@ function CoctailItem(props) {
           className="cart-button-empty"
           onClick={() => showIngredients(name)}
         >
-          <i className="bx bx-cart-add">
+          <i className="bx bx-cart-add btn-icon">
             {" "}
             <span className="add-to-chart-text">Add to Cart</span>
           </i>
