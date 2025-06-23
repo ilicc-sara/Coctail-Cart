@@ -131,6 +131,15 @@ form {
   background-color: #5b072e;
   width: 300px;
   height: 500px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
 }
 
 .hidden {

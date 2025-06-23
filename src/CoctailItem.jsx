@@ -1,9 +1,12 @@
 import React from "react";
 
 function CoctailItem(props) {
-  const { image, name, id, setCart, checkIsItemInCart } = props;
-  console.log(id);
+  // prettier-ignore
+  const { image, name, id, setCart, checkIsItemInCart, findItemAmount, increaseItemAmount, decreaseItemAmount } = props;
+
   const isItemInCart = checkIsItemInCart(id);
+
+  const itemAmount = findItemAmount(id);
 
   function showIngredients(name) {
     const fetchPost = async () => {
@@ -33,15 +36,17 @@ function CoctailItem(props) {
     fetchPost();
   }
   return (
-    <article className="coctail-item" onClick={() => showIngredients(name)}>
+    <article className="coctail-item">
       <span className="image-cont">
         {" "}
         <img src={image} className="coctail-img" />{" "}
       </span>
-      <h5> {name} </h5>
 
       {!isItemInCart && (
-        <div className="cart-button-empty">
+        <div
+          className="cart-button-empty"
+          onClick={() => showIngredients(name)}
+        >
           <i className="bx bx-cart-add">
             {" "}
             <span className="add-to-chart-text">Add to Cart</span>
@@ -50,11 +55,16 @@ function CoctailItem(props) {
       )}
       {isItemInCart && (
         <div className="cart-button-full">
-          <button className="btn">-</button>
-          <span className="amount-text">1</span>
-          <button className="btn">+</button>
+          <button className="btn" onClick={() => decreaseItemAmount(id)}>
+            -
+          </button>
+          <span className="amount-text">{itemAmount}</span>
+          <button className="btn" onClick={() => increaseItemAmount(id)}>
+            +
+          </button>
         </div>
       )}
+      <h5> {name} </h5>
     </article>
   );
 }

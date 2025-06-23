@@ -44,7 +44,39 @@ function App() {
     return cart.includes(cart.find((cartItem) => cartItem.id === id));
   }
 
-  checkIsItemInCart("13940");
+  function findItemAmount(id) {
+    return cart.find((item) => item?.id === id)?.amount;
+  }
+
+  function increaseItemAmount(id) {
+    setCart((prev) =>
+      prev.map((item) => {
+        if (item.id === id) {
+          return { ...item, amount: item.amount + 1 };
+        } else return item;
+      })
+    );
+  }
+
+  function decreaseItemAmount(id) {
+    setCart((prev) =>
+      prev.map((item) => {
+        if (item.id === id && item.amount !== 1) {
+          return { ...item, amount: item.amount - 1 };
+        } else return item;
+      })
+    );
+
+    if (findItemAmount(id) === 1) {
+      setCart((prev) => prev.filter((item) => item.id !== id));
+    }
+  }
+
+  function sumAllItems() {
+    return cart.reduce((acc, cur) => {
+      return acc + cur.amount;
+    }, 0);
+  }
 
   // prettier-ignore
   const ingredients = [{ name: "Gin" }, { name: "Vodka" }, { name: "Rum" }, { name: "Tequila" }, { name: "Wine" }, { name: "Whiskey" }, { name: "Aperol" }, { name: "Campari" }, { name: "Jagermeister" }, { name: "Grenadine" }, { name: "Mint" }, { name: "Lemon" }, { name: "Pineapple" } ];
@@ -72,18 +104,19 @@ function App() {
             coctails.map((item, index) => {
               return (
                 // prettier-ignore
-                <CoctailItem key={index} name={item.strDrink} image={item.strDrinkThumb} id={item.idDrink} setCart={setCart} checkIsItemInCart={checkIsItemInCart} />
+                <CoctailItem key={index} name={item.strDrink} image={item.strDrinkThumb} id={item.idDrink} setCart={setCart} checkIsItemInCart={checkIsItemInCart} findItemAmount={findItemAmount} increaseItemAmount={increaseItemAmount} decreaseItemAmount={decreaseItemAmount} />
               );
             })}
         </div>
       )}
 
       <div className="cart-window">
+        <h3> {`Items in cart: ${sumAllItems()}`} </h3>
         {cart.map((cartItem, index) => (
-          <p key={index}>
+          <div className="cart-item" key={index}>
             {" "}
-            {cartItem.name} {cartItem.amount}{" "}
-          </p>
+            <span>{cartItem.name}</span> <span>{cartItem.amount}</span>{" "}
+          </div>
         ))}
       </div>
 
