@@ -2,8 +2,8 @@ import React from "react";
 
 function CoctailItem(props) {
   const { image, name, id, setCart, checkIsItemInCart } = props;
-  // console.log(id);
-  const isItemInCart = checkIsItemInCart("15300");
+  console.log(id);
+  const isItemInCart = checkIsItemInCart(id);
 
   function showIngredients(name) {
     const fetchPost = async () => {
@@ -27,7 +27,7 @@ function CoctailItem(props) {
         ...prev,
         { name: coctailName, id: coctailId, amount: 1 },
       ]);
-      console.log(checkIsItemInCart("15300"));
+      console.log(isItemInCart);
     };
 
     fetchPost();
@@ -49,10 +49,10 @@ function CoctailItem(props) {
         </div>
       )}
       {isItemInCart && (
-        <div class="cart-button-full">
-          <button class="btn">-</button>
+        <div className="cart-button-full">
+          <button className="btn">-</button>
           <span className="amount-text">1</span>
-          <button class="btn">+</button>
+          <button className="btn">+</button>
         </div>
       )}
     </article>

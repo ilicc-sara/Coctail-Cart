@@ -79,8 +79,8 @@ function App() {
       )}
 
       <div className="cart-window">
-        {cart.map((cartItem) => (
-          <p>
+        {cart.map((cartItem, index) => (
+          <p key={index}>
             {" "}
             {cartItem.name} {cartItem.amount}{" "}
           </p>
