@@ -5,9 +5,10 @@ import CoctailItem from "./CoctailItem";
 function App() {
   const [coctails, setCoctails] = useState(null);
 
-  const [query, setQuery] = useState("");
-
   const [error, showError] = useState(false);
+
+  const [cart, setCart] = useState([]);
+  console.log(cart);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -39,42 +40,11 @@ function App() {
     fetchPost();
   }
 
-  function handleInputChange(e) {
-    console.log(e.target.value);
-    setQuery(e.target.value);
-    console.log(query);
-    const newQuery = e.target.value;
-    if (!newQuery) return;
-    setQuery(newQuery);
-
-    const debounceFunc = debounce(1500, () => {
-      const fetchPost = async () => {
-        try {
-          showError(false);
-          const response = await fetch(
-            ` https://thecocktaildb.com/api/json/v1/1/search.php?s=${newQuery}`
-          );
-          const posts = await response.json();
-          console.log(posts);
-          console.log(response);
-          console.log(posts.drinks);
-
-          setCoctails(posts.drinks);
-          if (!posts.drinks) showError(true);
-        } catch (error) {
-          console.log("error", error);
-        }
-      };
-
-      fetchPost();
-    });
-
-    debounceFunc(); // will not be invoked
-
-    debounceFunc.cancel({ upcomingOnly: true });
-
-    debounceFunc(); // will be invoked
+  function checkIsItemInCart(id) {
+    return cart.includes(cart.find((cartItem) => cartItem.id === id));
   }
+
+  checkIsItemInCart("13940");
 
   // prettier-ignore
   const ingredients = [{ name: "Gin" }, { name: "Vodka" }, { name: "Rum" }, { name: "Tequila" }, { name: "Wine" }, { name: "Whiskey" }, { name: "Aperol" }, { name: "Campari" }, { name: "Jagermeister" }, { name: "Grenadine" }, { name: "Mint" }, { name: "Lemon" }, { name: "Pineapple" } ];
@@ -94,7 +64,7 @@ function App() {
 
       <label>Search by name:</label>
       {/* prettier-ignore */}
-      <input type="text" className="input-name" value={query} onChange={(e) => handleInputChange(e)} />
+      <input type="text" className="input-name"  />
 
       {!error && (
         <div className="coctails-list">
@@ -102,11 +72,20 @@ function App() {
             coctails.map((item, index) => {
               return (
                 // prettier-ignore
-                <CoctailItem key={index} name={item.strDrink} image={item.strDrinkThumb} id={item.idDrink} />
+                <CoctailItem key={index} name={item.strDrink} image={item.strDrinkThumb} id={item.idDrink} setCart={setCart} checkIsItemInCart={checkIsItemInCart} />
               );
             })}
         </div>
       )}
+
+      <div className="cart-window">
+        {cart.map((cartItem) => (
+          <p>
+            {" "}
+            {cartItem.name} {cartItem.amount}{" "}
+          </p>
+        ))}
+      </div>
 
       {error && (
         <h1 className="err-msg">There's no coctails with this name...</h1>
