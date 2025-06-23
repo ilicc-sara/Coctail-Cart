@@ -67,21 +67,23 @@ form {
 
 .cart-button-empty {
   border: 1px solid black;
-  background-color: wheat;
+  background-color: #efb8d2;
   width: 150px;
+
   border-radius: 555555px;
   text-align: center;
 
   position: absolute;
   left: 50%;
-  bottom: 25px;
+  bottom: 33px;
   transform: translate(-50%, 50%);
   cursor: pointer;
 }
 
 .cart-button-full {
   border: 1px solid black;
-  background-color: orange;
+
+  background-color: #f269a9;
   width: 150px;
   border-radius: 555555px;
   display: flex;
@@ -91,24 +93,24 @@ form {
   bottom: 5px;
   position: absolute;
   left: 50%;
-  bottom: 25px;
+  bottom: 33px;
   transform: translate(-50%, 50%);
 }
 
 .bx-cart-add,
 .btn {
   color: rgb(0, 0, 0);
-  background-color: wheat;
+  background-color: #efb8d2;
 }
 
 .add-to-chart-text {
   color: black;
-  background-color: wheat;
+  background-color: #efb8d2;
 }
 
 .amount-text {
   color: black;
-  background-color: orange;
+  background-color: #f269a9;
 }
 
 .btn {
@@ -128,7 +130,8 @@ form {
   position: absolute;
   top: 180px;
   right: 50px;
-  background-color: #5b072e;
+  /* background-color: #5b072e; */
+  background-color: #eab7d1;
   width: 300px;
   height: 500px;
   padding: 10px;
@@ -139,7 +142,58 @@ form {
 
 .cart-item {
   display: flex;
-  justify-content: space-between;
+  padding: 10px;
+  border: 0.5px solid black;
+  background-color: #eab7d1;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  position: relative;
+  border-radius: 10px;
+}
+
+.cartItem-img {
+  height: 50px;
+  width: 50px;
+  border-radius: 5px;
+}
+
+.delete-btn {
+  justify-self: end;
+  background: none;
+  color: #230312;
+  border: 0.5px solid #230312;
+  width: 20px;
+  height: 20px;
+  border-radius: 222px;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.delete-btn:hover {
+  background-color: #5b072e;
+  border: none;
+  color: #eab7d1;
+}
+.cart-item-details {
+  background-color: #eab7d1;
+  color: #230312;
+  text-align: start;
+}
+.cartName,
+h3,
+.amnt {
+  background-color: #eab7d1;
+  color: #230312;
+}
+
+.amnt {
+  font-weight: 600;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: #5b072e;
 }
 
 .hidden {

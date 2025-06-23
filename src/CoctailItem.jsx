@@ -26,9 +26,18 @@ function CoctailItem(props) {
         (coctail) => coctail.strDrink === name
       ).idDrink;
 
+      const coctailPicture = posts.drinks.find(
+        (coctail) => coctail.strDrink === name
+      ).strDrinkThumb;
+
       setCart((prev) => [
         ...prev,
-        { name: coctailName, id: coctailId, amount: 1 },
+        {
+          name: coctailName,
+          id: coctailId,
+          amount: 1,
+          picture: coctailPicture,
+        },
       ]);
       console.log(isItemInCart);
     };
@@ -64,7 +73,7 @@ function CoctailItem(props) {
           </button>
         </div>
       )}
-      <h5> {name} </h5>
+      <h5 className="coctail-name"> {name} </h5>
     </article>
   );
 }

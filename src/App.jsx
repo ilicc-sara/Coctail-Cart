@@ -72,6 +72,10 @@ function App() {
     }
   }
 
+  function deleteItem(id) {
+    setCart((prev) => prev.filter((item) => item.id !== id));
+  }
+
   function sumAllItems() {
     return cart.reduce((acc, cur) => {
       return acc + cur.amount;
@@ -113,10 +117,23 @@ function App() {
       <div className="cart-window">
         <h3> {`Items in cart: ${sumAllItems()}`} </h3>
         {cart.map((cartItem, index) => (
-          <div className="cart-item" key={index}>
-            {" "}
-            <span>{cartItem.name}</span> <span>{cartItem.amount}</span>{" "}
-          </div>
+          // <div className="cart-item" key={index}>
+          //   {" "}
+          //   <span>{cartItem.name}</span> <span>{cartItem.amount}</span>{" "}
+          // </div>
+          <article className="cart-item" key={index}>
+            <img className="cartItem-img" src={cartItem.picture} />
+            <div className="cart-item-details">
+              <h5 className="cartName">{cartItem.name}</h5>
+              <span className="amnt">{cartItem.amount} X</span>
+            </div>
+            <button
+              className="delete-btn"
+              onClick={() => deleteItem(cartItem.id)}
+            >
+              X
+            </button>
+          </article>
         ))}
       </div>
 
