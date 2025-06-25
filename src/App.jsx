@@ -172,19 +172,6 @@ function App() {
           <h1 className="empty-cart"> {`Cart is empty...`} </h1>
         )}
         {cart.map((cartItem, index) => (
-          // <article className="cart-item" key={index}>
-          //   <img className="cartItem-img" src={cartItem.picture} />
-          //   <div className="cart-item-details">
-          //     <h5 className="cartName">{cartItem.name}</h5>
-          //     <span className="amnt">{cartItem.amount} X</span>
-          //   </div>
-          //   <button
-          //     className="delete-btn"
-          //     onClick={() => deleteItem(cartItem.id)}
-          //   >
-          //     X
-          //   </button>
-          // </article>
           <CartItem
             key={index}
             picture={cartItem.picture}
