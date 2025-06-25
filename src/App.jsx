@@ -30,20 +30,6 @@ function App() {
     fetchPost();
   }, []);
 
-  function handleClick(e) {
-    let ingredient = e.target.getAttribute("name");
-    const fetchPost = async () => {
-      const response = await fetch(
-        `https://thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`
-      );
-      const posts = await response.json();
-
-      setCoctails(posts.drinks);
-    };
-
-    fetchPost();
-  }
-
   function handleInputChange(e) {
     console.log(e.target.value);
     setQuery(e.target.value);
@@ -171,10 +157,6 @@ function App() {
           <h1 className="empty-cart"> {`Cart is empty...`} </h1>
         )}
         {cart.map((cartItem, index) => (
-          // <div className="cart-item" key={index}>
-          //   {" "}
-          //   <span>{cartItem.name}</span> <span>{cartItem.amount}</span>{" "}
-          // </div>
           <article className="cart-item" key={index}>
             <img className="cartItem-img" src={cartItem.picture} />
             <div className="cart-item-details">

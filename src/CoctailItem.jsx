@@ -8,41 +8,43 @@ function CoctailItem(props) {
 
   const itemAmount = findItemAmount(id);
 
-  function showIngredients(name) {
-    const fetchPost = async () => {
-      const response = await fetch(
-        // `https://thecocktaildb.com/api/json/v1/1/lookup.php?iid=${id}`
-        // `https://thecocktaildb.com/api/json/v1/1/lookup.php?s=${name}`
-        `https://thecocktaildb.com/api/json/v1/1/search.php?s=${name}`
-      );
-      const posts = await response.json();
-      console.log(
-        posts.drinks.find((coctail) => coctail.strDrink === name).idDrink
-      );
-      const coctailName = posts.drinks.find(
-        (coctail) => coctail.strDrink === name
-      ).strDrink;
-      const coctailId = posts.drinks.find(
-        (coctail) => coctail.strDrink === name
-      ).idDrink;
+  function addToCart(name) {
+    // const fetchPost = async () => {
+    //   const response = await fetch(
+    //     `https://thecocktaildb.com/api/json/v1/1/search.php?s=${name}`
+    //   );
+    //   const posts = await response.json();
+    //   console.log(
+    //     posts.drinks.find((coctail) => coctail.strDrink === name).idDrink
+    //   );
+    //   const coctailName = posts.drinks.find(
+    //     (coctail) => coctail.strDrink === name
+    //   ).strDrink;
+    //   const coctailId = posts.drinks.find(
+    //     (coctail) => coctail.strDrink === name
+    //   ).idDrink;
 
-      const coctailPicture = posts.drinks.find(
-        (coctail) => coctail.strDrink === name
-      ).strDrinkThumb;
+    //   const coctailPicture = posts.drinks.find(
+    //     (coctail) => coctail.strDrink === name
+    //   ).strDrinkThumb;
 
-      setCart((prev) => [
-        ...prev,
-        {
-          name: coctailName,
-          id: coctailId,
-          amount: 1,
-          picture: coctailPicture,
-        },
-      ]);
-      console.log(isItemInCart);
-    };
+    setCart((prev) => [
+      ...prev,
+      {
+        // name: coctailName,
+        // id: coctailId,
+        // amount: 1,
+        // picture: coctailPicture,
+        name: name,
+        id: id,
+        amount: 1,
+        picture: image,
+      },
+    ]);
+    //   console.log(isItemInCart);
+    // };
 
-    fetchPost();
+    // fetchPost();
   }
   return (
     <article className="coctail-item">
@@ -52,10 +54,7 @@ function CoctailItem(props) {
       </span>
 
       {!isItemInCart && (
-        <div
-          className="cart-button-empty"
-          onClick={() => showIngredients(name)}
-        >
+        <div className="cart-button-empty" onClick={() => addToCart(name)}>
           <i className="bx bx-cart-add btn-icon">
             {" "}
             <span className="add-to-chart-text">Add to Cart</span>
