@@ -31,6 +31,20 @@ function App() {
     fetchPost();
   }, []);
 
+  function handleClick(e) {
+    let ingredient = e.target.getAttribute("name");
+    const fetchPost = async () => {
+      const response = await fetch(
+        `https://thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`
+      );
+      const posts = await response.json();
+
+      setCoctails(posts.drinks);
+    };
+
+    fetchPost();
+  }
+
   function handleInputChange(e) {
     console.log(e.target.value);
     setQuery(e.target.value);
