@@ -4,6 +4,7 @@ import CoctailItem from "./CoctailItem";
 import CartItem from "./CartItem";
 import { debounce } from "throttle-debounce";
 import { ingredients } from "./data";
+import axios from "axios";
 
 function App() {
   const [coctails, setCoctails] = useState(null);
@@ -17,6 +18,10 @@ function App() {
   const [displayCart, setDisplayCart] = useState(false);
 
   const url = `https://thecocktaildb.com/api/json/v1/1/filter.php?i=Gin`;
+
+  axios.get(url).then((response) => {
+    console.log(response.data);
+  });
 
   useEffect(() => {
     const fetchPost = async () => {
