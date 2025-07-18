@@ -19,25 +19,31 @@ function App() {
 
   const url = `https://thecocktaildb.com/api/json/v1/1/filter.php?i=Gin`;
 
-  axios.get(url).then((response) => {
-    console.log(response.data);
-  });
+  axios
+    .get(url)
+    .then((response) => {
+      console.log(response.data);
+      setCoctails(response?.data?.drinks);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const response = await fetch(
-          `https://thecocktaildb.com/api/json/v1/1/filter.php?i=Gin`
-        );
-        const posts = await response.json();
-        setCoctails(posts.drinks);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchPost = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `https://thecocktaildb.com/api/json/v1/1/filter.php?i=Gin`
+  //       );
+  //       const posts = await response.json();
+  //       setCoctails(posts.drinks);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
 
-    fetchPost();
-  }, []);
+  //   fetchPost();
+  // }, []);
 
   function handleClick(e) {
     let ingredient = e.target.getAttribute("name");
