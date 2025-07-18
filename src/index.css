@@ -154,6 +154,7 @@ form {
   width: 400px;
   height: fit-content;
   min-height: 300px;
+  max-height: 700px;
   padding: 50px 20px;
   display: flex;
   flex-direction: column;
@@ -166,6 +167,7 @@ form {
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
+  overflow-y: scroll;
 }
 
 .open-cart {

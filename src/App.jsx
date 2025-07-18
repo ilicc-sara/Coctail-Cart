@@ -155,8 +155,17 @@ function App() {
           {coctails &&
             coctails.map((item, index) => {
               return (
-                // prettier-ignore
-                <CoctailItem key={index} name={item.strDrink} image={item.strDrinkThumb} id={item.idDrink} setCart={setCart} checkIsItemInCart={checkIsItemInCart} findItemAmount={findItemAmount} increaseItemAmount={increaseItemAmount} decreaseItemAmount={decreaseItemAmount} />
+                <CoctailItem
+                  key={index}
+                  name={item.strDrink}
+                  image={item.strDrinkThumb}
+                  id={item.idDrink}
+                  setCart={setCart}
+                  checkIsItemInCart={checkIsItemInCart}
+                  findItemAmount={findItemAmount}
+                  increaseItemAmount={increaseItemAmount}
+                  decreaseItemAmount={decreaseItemAmount}
+                />
               );
             })}
         </div>
@@ -164,8 +173,7 @@ function App() {
 
       <div className={`cart-window ${displayCart ? "open-cart" : ""}`}>
         <button className="close-btn" onClick={() => setDisplayCart(false)}>
-          {" "}
-          X{" "}
+          X
         </button>
         {cart.length > 0 && <h3> {`Items in cart: ${sumAllItems()}`} </h3>}
         {cart.length === 0 && (
