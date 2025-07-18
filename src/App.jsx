@@ -3,6 +3,7 @@ import "./App.css";
 import CoctailItem from "./CoctailItem";
 import CartItem from "./CartItem";
 import { debounce } from "throttle-debounce";
+import { ingredients } from "./data";
 
 function App() {
   const [coctails, setCoctails] = useState(null);
@@ -14,6 +15,8 @@ function App() {
   const [cart, setCart] = useState([]);
 
   const [displayCart, setDisplayCart] = useState(false);
+
+  const url = `https://thecocktaildb.com/api/json/v1/1/filter.php?i=Gin`;
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -123,9 +126,6 @@ function App() {
       return acc + cur.amount;
     }, 0);
   }
-
-  // prettier-ignore
-  const ingredients = [{ name: "Gin" }, { name: "Vodka" }, { name: "Rum" }, { name: "Tequila" }, { name: "Wine" }, { name: "Whiskey" }, { name: "Aperol" }, { name: "Campari" }, { name: "Jagermeister" }, { name: "Grenadine" }, { name: "Mint" }, { name: "Lemon" }, { name: "Pineapple" } ];
 
   return (
     <>

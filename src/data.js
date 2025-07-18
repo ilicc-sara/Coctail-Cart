@@ -1,0 +1,15 @@
+export const ingredients = [
+  { name: "Gin" },
+  { name: "Vodka" },
+  { name: "Rum" },
+  { name: "Tequila" },
+  { name: "Wine" },
+  { name: "Whiskey" },
+  { name: "Aperol" },
+  { name: "Campari" },
+  { name: "Jagermeister" },
+  { name: "Grenadine" },
+  { name: "Mint" },
+  { name: "Lemon" },
+  { name: "Pineapple" },
+];
